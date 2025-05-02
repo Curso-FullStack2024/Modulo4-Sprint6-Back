@@ -19,9 +19,5 @@ const router = express.Router()
  router.post('/resetpassword/', resetPasswordController)
 //  router.post('/resetpassword/token', recoveryPasswordController)
  
-// router.put('/movies/actualizar/:id',  updateMovieController)
-// router.put('/heroes/:id/editar', editarHeroeController) // envia al servidor
-// router.delete('/movies/borrar/:id', deleteMovieController)
-// router.delete('/heroes/borrarpornombre/:name', borrarPorNombreController)
 
 export default router;
