@@ -19,8 +19,8 @@ router.get('/buscar/:atributo/:valor', findMoviesByPropController)
 
  router.post('/crear/', createMovieController)
 router.put('/actualizar/:id',  updateMovieController)
-
+// router.put('/heroes/:id/editar', editarHeroeController) // envia al servidor
 router.delete('/borrar/:id', deleteMovieController)
-
+// router.delete('/heroes/borrarpornombre/:name', borrarPorNombreController)
 
 export default router;
