@@ -57,10 +57,12 @@ class movieRepository  {
     // }
 
 //crea una nueva pelicula
-    async createMovie(data) {    
+    async createMovie(data) {   
+        // console.log(data) 
         try {
             const newMovie= await Movie.create(data)        
-            return newMovie            
+            return newMovie    
+                
         } catch (error) {
             console.error(`se produjo un error: ${error} `)
             throw new Error(`Error al crear la película: ${error.message}`);
@@ -101,12 +103,33 @@ class movieRepository  {
     }
 
 
+    async getAllGenres() {
+        try {           
+            const genres = await Genre.find()            
+            return genres
+
+        } catch (error) {
+            console.error(`se produjo un error: ${error} `)
+        }
+    }
+
     async getLanguage(iso) {
         try {
             const query = { iso_639_1 : iso }
             const language = await Language.findOne(query)
             // console.log(genre)
-            return language.name
+            return language.english_name
+
+        } catch (error) {
+            console.error(`se produjo un error: ${error} `)
+        }
+    }
+
+
+    async getAllLanguages() {
+        try {            
+            const languages = await Language.find()          
+            return languages
 
         } catch (error) {
             console.error(`se produjo un error: ${error} `)

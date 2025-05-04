@@ -1,14 +1,18 @@
-import { createMovie, deleteMovie, findMoviesByProp, getAllMovies, getGenre, getMovieByID, updateMovie } from '../services/movieServices.js'
+import { createMovie, deleteMovie, findMoviesByProp, getAllGenres, getAllLanguages, getAllMovies, getGenre, getMovieByID, updateMovie } from '../services/movieServices.js'
 
 
 export async function getMovieByIDController(req, res) {
-    const { id } = req.params
-    const movie = await getMovieByID(id)
-
-    if (movie) {
-        res.json(movie);
-    } else {
-        res.status(404).send({ mensaje: 'Película no encontrado' })
+    try {
+        const { id } = req.params
+        const movie = await getMovieByID(id)
+    
+        if (movie) {
+            res.json(movie);
+        } else {
+            res.status(404).send({ mensaje: 'Película no encontrado' })
+        }        
+    } catch (error) {
+        res.status(400).json({ message: error.message }); 
     }
 
 }
@@ -32,15 +36,35 @@ export async function findMoviesByPropController(req, res) {
     }
 }
 
+
+export async function getMovieByIMDbController(req, res) {
+    try {
+        const { id } = req.params
+        const movie= await findMoviesByProp('id', id)
+    
+        if (movie) {
+            res.json(movie);
+        } else {
+            res.status(404).send({ mensaje: 'Película no encontrado' })
+        }        
+    } catch (error) {
+        res.status(400).json({ message: error.message }); 
+    }
+
+}
 // export async function obtenerSuperheroesMayoresDe30Controller(req, res) {
 //     const superheroes = await obtenerSuperheroesMayoresDe30()
 //     res.send(renderizarListaSuperheroes(superheroes))
 // }
 
 
-export async function createMovieController(req, res) {    
-    const newMovie = await createMovie(req.body)
-    res.send(newMovie)
+export async function createMovieController(req, res) {  
+    try {
+        const newMovie = await createMovie(req.body)
+        res.send(newMovie)        
+    } catch (error) {
+        res.status(400).json({ message: error.message }); 
+    }  
  
 }
 
@@ -69,9 +93,20 @@ export async function getGenreController(req, res) {
     const genre = await getGenre(req.params.id)
     
     res.send(  genre )
-    // res.json({  movies })
+
 }
 
+
+export async function getAllGenresController(req, res) {
+    const genres = await getAllGenres()    
+    res.send(  genres )   
+}
+
+
+export async function getAllLanguagesController(req, res) {
+    const languages = await getAllLanguages()    
+    res.send( languages )    
+}
 
 // export async function borrarPorNombreController(req, res) {
 //     const superheroe = await borrarPorNombre(req.params.name)

@@ -3,7 +3,7 @@ import { Genre } from "./genreModel.js";
 
 //// ESQUEMA  DE PELICULA
 const movieSchema = new mongoose.Schema({  
-    // _id: mongoose.Schema.Types.ObjectId,
+     //_id: mongoose.Schema.Types.ObjectId,
   adult: { type: Boolean },
   backdrop_path: { type: String },
   genre_ids: [{
@@ -13,7 +13,7 @@ const movieSchema = new mongoose.Schema({
   }],
   id: { type: Number },
   original_language: { type: String },
-  original_title: { type: [String] },
+  original_title: { type: String },
   overview: { type: String },
   popularity: { type: Number },
   poster_path: { type: String },
