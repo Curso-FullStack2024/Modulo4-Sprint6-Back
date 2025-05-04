@@ -1,5 +1,5 @@
 import express from "express";
-import { createMovieController, deleteMovieController, findMoviesByPropController, getAllMoviesController, getMovieByIDController, updateMovieController } from "../controllers/moviesController.js";
+import { createMovieController, deleteMovieController, findMoviesByPropController, getAllMoviesController, getGenreController, getMovieByIDController, updateMovieController } from "../controllers/moviesController.js";
 // import {
 //      obtenerSuperheroePorIdController, obtenerTodoslosSuperheroesController, buscarSuperheroesPorAtributoController,
 //      obtenerSuperheroesMayoresDe30Controller, agregarHeroeController, actualizarHeroeController, borrarHeroeController, 
@@ -12,6 +12,7 @@ const router = express.Router()
 
 router.get('/', getAllMoviesController)
 router.get('/id/:id', getMovieByIDController)
+router.get('/genre/:id', getGenreController)
 router.get('/buscar/:atributo/:valor', findMoviesByPropController)
 // router.get('/heroes/mayoresDe30/', obtenerSuperheroesMayoresDe30Controller)
 // router.get('/heroes/agregar/', agregarController) // muestra el formulario

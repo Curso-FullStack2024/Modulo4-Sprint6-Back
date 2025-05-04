@@ -58,7 +58,7 @@ const  mailContent=(mail, link)=>{
         <div class="header-banner"> 
 
             <div class="header">
-                <img src="https://c0.klipartz.com/pngpicture/970/73/gratis-png-texto-de-netflix-logotipo-de-la-marca-netflix-ilustrador-thumbnail.png" alt="Logo" class="logo">
+                <img src="https://nextfliks.netlify.app/avatars/logo_blanco-removebg.png" alt="Logo" class="logo">
                 <h2>Cambio de contraseñaa</h2>
                 </div>
         </div>

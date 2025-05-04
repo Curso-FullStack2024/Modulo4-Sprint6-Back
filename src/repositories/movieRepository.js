@@ -1,11 +1,14 @@
 import { Movie  }from "../models/movieModel.js";
+import { Genre } from "../models/genreModel.js";
+import { Language } from "../models/languageModel.js";
+
 
 
 class movieRepository  {
     //busca por ID
     async getByID(id) {
         try {
-            return await Movie.findById(id)
+            return await Movie.findById(id).lean()
 
         } catch (error) {
             console.error(`se produjo un error: ${error} `)
@@ -15,7 +18,11 @@ class movieRepository  {
     //devuelve todos los documentos
     async getAll(skip=0, limit=null) {
         try {
-            return await Movie.find().limit(20)
+            return await Movie.find().limit(24).populate({
+                path: 'genres',
+                select: 'name', // Solo trae el campo 'name'
+                options: { strictPopulate: false }})
+
             // Obtener documentos desde el 11 al 20
             //return Movie.find().skip(10).limit(10);            
         } catch (error) {
@@ -81,5 +88,31 @@ class movieRepository  {
     //     return heroe
     // }
 
+    async getGenre(id) {
+        try {
+            const query = { id : id }
+            const genre = await Genre.findOne(query)
+            // console.log(genre)
+            return genre.name
+
+        } catch (error) {
+            console.error(`se produjo un error: ${error} `)
+        }
+    }
+
+
+    async getLanguage(iso) {
+        try {
+            const query = { iso_639_1 : iso }
+            const language = await Language.findOne(query)
+            // console.log(genre)
+            return language.name
+
+        } catch (error) {
+            console.error(`se produjo un error: ${error} `)
+        }
+    }
+
 }
+
 export default new movieRepository()

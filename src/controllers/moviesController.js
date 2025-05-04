@@ -1,4 +1,4 @@
-import { createMovie, deleteMovie, findMoviesByProp, getAllMovies, getMovieByID, updateMovie } from '../services/movieServices.js'
+import { createMovie, deleteMovie, findMoviesByProp, getAllMovies, getGenre, getMovieByID, updateMovie } from '../services/movieServices.js'
 
 
 export async function getMovieByIDController(req, res) {
@@ -16,7 +16,7 @@ export async function getMovieByIDController(req, res) {
 export async function getAllMoviesController(req, res) {
     const movies = await getAllMovies()
     //res.send(renderizarListamovies(movies))
-    res.send(  {movies} )
+    res.send(  movies )
     // res.json({  movies })
 }
 
@@ -60,6 +60,16 @@ export async function updateMovieController(req, res) {
 export async function deleteMovieController(req, res) {
     const movie = await deleteMovie(req.params.id)
     res.send(movie)
+}
+
+
+
+
+export async function getGenreController(req, res) {
+    const genre = await getGenre(req.params.id)
+    
+    res.send(  genre )
+    // res.json({  movies })
 }
 
 

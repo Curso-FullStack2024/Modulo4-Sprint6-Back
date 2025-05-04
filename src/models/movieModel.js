@@ -1,11 +1,16 @@
 import mongoose from "mongoose"
+import { Genre } from "./genreModel.js";
 
 //// ESQUEMA  DE PELICULA
 const movieSchema = new mongoose.Schema({  
     // _id: mongoose.Schema.Types.ObjectId,
   adult: { type: Boolean },
   backdrop_path: { type: String },
-  genre_ids: { type: [Number] },
+  genre_ids: [{
+    type: Number,
+    ref: 'Genre', // Referencia al modelo Genre
+    field: 'id' 
+  }],
   id: { type: Number },
   original_language: { type: String },
   original_title: { type: [String] },

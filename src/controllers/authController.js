@@ -1,4 +1,4 @@
-import {  login, registerUser, verifyEmail, forgotPassword, resetPassword } from "../services/authServices.js";
+import {  login, registerUser, verifyEmail, forgotPassword, resetPassword, deleteUser, changePassword } from "../services/authServices.js";
 
 
 export async function registerController(req, res) {    
@@ -100,3 +100,47 @@ export async function resetPasswordController(req, res) {
         res.status(400).json({ message: error.message });        
     }
 }
+
+
+
+
+export async function deleteUserController(req, res) {    
+    try {        
+          const {id} = req.params;
+
+       const result=await deleteUser(id);
+
+        if (result.success){
+            res.status(200).json({ message: 'usuario eliminado' });
+        }else{
+            console.log('Error al eliminar el usuario:', result.error);            
+            throw new Error(result.error)
+        }        
+    } catch (error) {        
+        res.status(400).json({ message: error.message });       
+    }
+}
+
+
+export async function changePasswordController(req, res) {    
+    try {
+        // Obtener token hasheado        
+          const {id, currentpassword, newpassword} = req.body;
+        // console.log(id, password)
+       const result=await changePassword(id, currentpassword, newpassword);
+
+        if (result.success){
+            res.status(200).json({ message: 'contraseña cambiada' });
+        }else{
+            console.log('Error al cambiar la contraseña:', result.error);
+            // res.status(400).json({ message:  result.error }); 
+            throw new Error(result.error)
+        }
+        
+       
+    } catch (error) {
+        // console.log('Enlace no válido:', error);
+        res.status(400).json({ message: error.message });        
+    }
+}
+

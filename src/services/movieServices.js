@@ -2,10 +2,19 @@ import MovieRepository from "../repositories/movieRepository.js";
 
 const repository = MovieRepository
 
-export function getMovieByID(id) {
-    const movie = repository.getByID(id)
-    return movie
+export async function  getMovieByID (id) {
+    const movie = await repository.getByID(id)
+    const genres = await Promise.all(movie.genre_ids.map(m => repository.getGenre(m)));
+    const language = await repository.getLanguage(movie.original_language)
+    // const genres=await repository.getGenre(movie.genre_ids[0])
+     
+     return {
+        ... movie,
+        genres,
+        language
+    }
 }
+
 
 export function getAllMovies() {
     const movies = repository.getAll()
@@ -39,4 +48,10 @@ export async function updateMovie(id, data) {
 export async function deleteMovie(id) {
     const movie = await repository.deleteMovie(id)
     return movie
+}
+
+
+export async function getGenre(id) {
+    const genres = await repository.getGenre(id)
+    return genres
 }

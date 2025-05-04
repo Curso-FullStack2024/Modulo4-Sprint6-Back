@@ -104,9 +104,15 @@ async getUserbyId(id) {
 //     }
 
 //BORRA EL USUARIO POR ID
-    async deleteUser(id) {        
-        const user= await User.findByIdAndDelete( id)        
-        return user
+    async deleteUser(id) {  
+        try {            
+            const user= await User.findByIdAndDelete( id)        
+            return user
+            
+        } catch (error) {
+            console.error(`se produjo un error: ${error} `)
+            throw new Error(`Error al borrar el usuario: ${error.message}`);
+        }      
     }
     
     // async borrarPorNombre(name) {        

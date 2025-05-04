@@ -257,7 +257,46 @@ export async function resetPassword  (id, password) {
 //     return movies
 // }
 
-// export async function deleteMovie(id) {
-//     const movie = await repository.deleteMovie(id)
-//     return movie
-// }
+export async function deleteUser(id) {
+    try {
+        const user = await repository.deleteUser(id)
+        if (user){
+        return { success: true};
+        }
+        else{
+            console.log('algo paso 🤔')
+            console.log(user)
+            return { success: false, error: 'no se encontró el usuario indicado' }
+        }
+    } catch (error) {
+        console.error('no se pudo eliminar el usuario:', err.message);
+        return { success: false, error: err.message }
+    }
+}
+
+
+export async function changePassword  (id, currentpassword, newpassword) {
+    try {      
+        const user = await repository.getUserbyId(id);
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+        const isValidPassword = await bcrypt.compare(currentpassword, user.password);
+
+        if (!isValidPassword) {
+            throw new Error('La contraseña actual es incorrecta');
+        }
+        const hashedPassword = await bcrypt.hash(newpassword, 10);
+
+        repository.update(id, {
+            password:hashedPassword,            
+        });
+        
+        return { success: true};
+         
+    } catch (err) {
+      console.error('no se pudo cambiar la contraseña:', err.message);
+      return { success: false, error: err.message };
+    
+  }
+};
