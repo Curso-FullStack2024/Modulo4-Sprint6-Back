@@ -1,18 +1,15 @@
 import express from "express";
 import { createController, deleteProfileController, getProfilesByUserIdController, updateController } from "../controllers/profileController.js";
-
-// import { heroeValidation } from '../validators/heroeValidator.mjs'
-// import { handleValidationErrors } from "../middlewares/errorMiddleware.mjs";
+import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router()
 
+  router.get('/userid/:userId',authenticateToken, getProfilesByUserIdController)
+  router.delete('/delete/:id', authenticateToken, deleteProfileController)
 
-  router.get('/userid/:userId', getProfilesByUserIdController)
-  router.get('/delete/:id', deleteProfileController)
 
-
- router.post('/create/', createController)
- router.post('/update/:id', updateController)
+ router.post('/create/', authenticateToken, createController)
+ router.post('/update/:id', authenticateToken, updateController)
 
 
 export default router;

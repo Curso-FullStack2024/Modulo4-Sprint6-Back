@@ -47,7 +47,13 @@ class authRepository  {
 // busca por email
 async getUserbyEmail(email) {
     try {
-        return await User.findOne({  email: { $eq: email } }).populate('role')
+        //return await User.findOne({  email: { $eq: email } }).populate('role')
+        return await User.findOne({  email: { $eq: email } }).populate({
+            path: 'role',
+            populate: {
+              path: 'permissions'
+            }
+          })
     }
     catch (error) {
         console.error(`se produjo un error: ${error} `)
@@ -56,9 +62,14 @@ async getUserbyEmail(email) {
 
 // busca por nombre
 async getUserbyUsername(username) {
-    
     try {       
-        return await User.findOne({  username: { $eq: username }  }).populate('role')
+        // return await User.findOne({  username: { $eq: username }  }).populate('role')
+        return await User.findOne({  username: { $eq: username }  }).populate({
+            path: 'role',
+            populate: {
+              path: 'permissions'
+            }
+          })
     }
     catch (error) {
         console.error(`se produjo un error: ${error} `)

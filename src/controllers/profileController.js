@@ -13,7 +13,7 @@ export async function createController(req, res) {
 
 
 export async function getProfilesByUserIdController(req, res) {    
-    try {
+    try {      
         const { userId } = req.params
         if (userId){
         const profiles = await getProfilesByProp('user', userId)

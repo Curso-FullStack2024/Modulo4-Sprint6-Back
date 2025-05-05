@@ -13,7 +13,18 @@ dotenv.config()
 const app=express()
 const PORT=process.env.PORT || 3500
 
-app.use(cors())
+
+const corsOptions = {
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    credentials: true,
+    maxAge: 86400 // 24 horas en segundos
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json())
 
 connectDB()

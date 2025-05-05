@@ -44,7 +44,7 @@ export async function verifyEmailController(req, res) {
 //     }
 // };
 
-export async function loginController(req, res) {    
+export async function loginController(req, res) {        
     try {
         const {email, password}=req.body
         const result = await login(email, password)
