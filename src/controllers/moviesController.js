@@ -1,4 +1,4 @@
-import { createMovie, deleteMovie, findMoviesByProp, getAllGenres, getAllLanguages, getAllMovies, getGenre, getMovieByID, updateMovie } from '../services/movieServices.js'
+import { createMovie, deleteMovie, findMoviesByProp, getAllGenres, getAllLanguages, getAllMovies, getGenre, getMovieByID, getTopMovies, updateMovie } from '../services/movieServices.js'
 
 
 export async function getMovieByIDController(req, res) {
@@ -37,7 +37,7 @@ export async function findMoviesByPropController(req, res) {
 }
 
 
-export async function getMovieByIMDbController(req, res) {
+export async function getMovieByTMDbController(req, res) {
     try {
         const { id } = req.params
         const movie= await findMoviesByProp('id', id)
@@ -52,10 +52,16 @@ export async function getMovieByIMDbController(req, res) {
     }
 
 }
-// export async function obtenerSuperheroesMayoresDe30Controller(req, res) {
-//     const superheroes = await obtenerSuperheroesMayoresDe30()
-//     res.send(renderizarListaSuperheroes(superheroes))
-// }
+
+
+
+export async function getTopMoviesController(req, res) {
+    const { field } = req.params;
+    const movies = await getTopMovies(field)
+    //res.send(renderizarListamovies(movies))
+    res.send(  movies )
+    // res.json({  movies })
+}
 
 
 export async function createMovieController(req, res) {  

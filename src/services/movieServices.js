@@ -34,6 +34,13 @@ export function getAllMovies() {
 }
 
 
+
+export async function getTopMovies(field) {
+    const movies = await repository.getTopByField(field, 5)
+    return movies
+}
+
+
 export async function findMoviesByProp(atributo, valor) {
     const movies = await repository.findByProp(atributo, valor)
     return movies

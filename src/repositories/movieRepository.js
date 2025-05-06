@@ -51,6 +51,14 @@ class movieRepository  {
         }
     }
 
+    //busca los top 5 por un campo
+    async getTopByField (field, limit = 5) {
+        return Movie.find() 
+          .sort({ [field]: -1 })
+          .limit(limit)
+          .select('-__v -_id')
+          .exec();
+      };
     
     // async obtenerMayoresDe30() {
     //     return await Movie.find({ edad: { $gt: 30 }, planetaOrigen: 'Tierra', $expr: { $gte: [{ $size: "$poderes" }, 2] } })
