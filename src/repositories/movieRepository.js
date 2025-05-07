@@ -16,15 +16,27 @@ class movieRepository  {
     }
 
     //devuelve todos los documentos
-    async getAll(skip=0, limit=null) {
+    async getAll( page=1 , isAdult=false, limit=24) {
         try {
-            return await Movie.find().limit(24).populate({
+            const currentPage = parseInt(page) || 1  ;
+             const total = await Movie.countDocuments('');
+             const skip = (page - 1) * limit;
+             const totalPages = Math.ceil(total / limit);
+             const query = isAdult  ? {}  : { adult: false }; // Filtro para no adultos
+            const result= await Movie.find(query).skip(skip).limit(limit).populate({
                 path: 'genres',
                 select: 'name', // Solo trae el campo 'name'
                 options: { strictPopulate: false }})
 
-            // Obtener documentos desde el 11 al 20
-            //return Movie.find().skip(10).limit(10);            
+           return {
+               pagination:{
+                   total,
+                   currentPage,
+                   totalPages,
+                   limit,                
+                },
+                data: result,
+           }      
         } catch (error) {
             console.error(`se produjo un error: ${error} `)            
         }        
@@ -52,8 +64,9 @@ class movieRepository  {
     }
 
     //busca los top 5 por un campo
-    async getTopByField (field, limit = 5) {
-        return Movie.find() 
+    async getTopByField (field, limit = 5, isAdult) {
+        const query = isAdult  ? {}  : { adult: false }; // Filtro para no adultos
+        return Movie.find(query) 
           .sort({ [field]: -1 })
           .limit(limit)
           .select('-__v -_id')

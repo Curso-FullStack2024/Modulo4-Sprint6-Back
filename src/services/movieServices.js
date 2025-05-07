@@ -28,15 +28,14 @@ export async function  getMovieByID (id) {
 }
 
 
-export function getAllMovies() {
-    const movies = repository.getAll()
+export async function  getAllMovies(page, adult) {
+    const movies = await repository.getAll(page, adult)    
     return movies
 }
 
 
-
-export async function getTopMovies(field) {
-    const movies = await repository.getTopByField(field, 5)
+export async function getTopMovies(field, adult) {
+    const movies = await repository.getTopByField(field, 5, adult)
     return movies
 }
 

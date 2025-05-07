@@ -18,7 +18,9 @@ export async function getMovieByIDController(req, res) {
 }
 
 export async function getAllMoviesController(req, res) {
-    const movies = await getAllMovies()
+    const page= req.query.page
+    const adult=req.headers['x-adult']==='true'
+    const movies = await getAllMovies(page, adult)
     //res.send(renderizarListamovies(movies))
     res.send(  movies )
     // res.json({  movies })
@@ -57,7 +59,8 @@ export async function getMovieByTMDbController(req, res) {
 
 export async function getTopMoviesController(req, res) {
     const { field } = req.params;
-    const movies = await getTopMovies(field)
+    const adult=req.headers['x-adult']==='true'
+    const movies = await getTopMovies(field, adult)
     //res.send(renderizarListamovies(movies))
     res.send(  movies )
     // res.json({  movies })
