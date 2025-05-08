@@ -4,12 +4,10 @@ import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router()
 
-  router.get('/userid/:userId',authenticateToken, getProfilesByUserIdController)
-  router.delete('/delete/:id', authenticateToken, deleteProfileController)
-
-
- router.post('/create/', authenticateToken, createController)
- router.post('/update/:id', authenticateToken, updateController)
+router.get('/userid/:userId', authenticateToken, getProfilesByUserIdController)
+router.delete('/delete/:id', authenticateToken, deleteProfileController)
+router.post('/create/', authenticateToken, createController)
+router.post('/update/:id', authenticateToken, updateController)
 
 
 export default router;

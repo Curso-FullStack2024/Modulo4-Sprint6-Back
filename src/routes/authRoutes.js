@@ -1,6 +1,6 @@
 import express from "express";
-import { registerController, verifyEmailController , loginController,  forgotPasswordController, resetPasswordController, deleteUserController, changePasswordController} from "../controllers/authController.js";
-import  {authenticateToken, hasPermission} from './../middleware/authMiddleware.js'
+import { changePasswordController, deleteUserController, forgotPasswordController, getAllUsersController, getRolesController, loginController, registerController, resetPasswordController, updateUserController, verifyEmailController } from "../controllers/authController.js";
+import { authenticateToken, hasPermission } from './../middleware/authMiddleware.js';
 
 
 const router = express.Router()
@@ -14,6 +14,9 @@ const router = express.Router()
  router.post('/changepassword/', changePasswordController)
  
  router.delete('/delete/:id',  authenticateToken, hasPermission('delete:users'), deleteUserController)
- 
+ router.get('/users/', authenticateToken, hasPermission('update:users'), getAllUsersController)
+ router.get('/roles/',  getRolesController)
+
+ router.put('/actualizar/:id', authenticateToken, hasPermission('update:users'), updateUserController)
 
 export default router;

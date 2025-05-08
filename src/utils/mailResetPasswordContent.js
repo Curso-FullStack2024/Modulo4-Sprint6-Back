@@ -1,6 +1,6 @@
-const  mailContent=(mail, link)=>{
-    return(
-        `
+const mailContent = (mail, link) => {
+  return (
+    `
   <!DOCTYPE html>
   <html lang="es">
   <head>
@@ -86,7 +86,7 @@ const  mailContent=(mail, link)=>{
   </body>
   </html>
   `
-    )
+  )
 }
 
 export default mailContent
