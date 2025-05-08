@@ -153,7 +153,7 @@ export async function forgotPassword(email) {
     const resetToken = tokenService.generateValidationToken(existingUser.id);
 
     // Crear URL de verificación
-    const resetUrl = `https://nextfliks.netlify.app/${resetToken}`;
+    const resetUrl = `https://nextfliks.netlify.app/resetpassword/${resetToken}`;
 
     // Enviar el token al correo electrónico del usuario
     const message = `Has solicitado el cambio de contraseña. Por favor, haz clic en el siguiente enlace : \n\n ${resetUrl}`;
