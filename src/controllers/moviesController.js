@@ -91,12 +91,12 @@ export async function getGenreController(req, res) {
 }
 
 
-export async function getAllGenresController(res) {
+export async function getAllGenresController(req, res) {
   const genres = await getAllGenres()
   res.send(genres)
 }
 
-export async function getAllLanguagesController(res) {
+export async function getAllLanguagesController(req, res) {
   const languages = await getAllLanguages()
   res.send(languages)
 }
