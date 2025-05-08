@@ -97,6 +97,10 @@ export async function verifyEmail(token) {
       return { success: true };
 
     }
+    else {
+      console.log('Token inválido o expirado');
+      return { success: false, error: 'Token inválido o expirado' };
+    }
   } catch (err) {
     console.error('no se pudo validar el email:', err.message);
     return { success: false, error: err.message };
