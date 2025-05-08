@@ -36,6 +36,7 @@ export async function loginController(req, res) {
   try {
     const { email, password } = req.body
     const result = await login(email, password)
+    console.log(result)
     res.status(200).send(result)
   } catch (error) {
     console.log('Error en login:', error);
