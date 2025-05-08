@@ -114,7 +114,7 @@ export async function changePasswordController(req, res) {
 }
 
 
-export async function getAllUsersController(res) {
+export async function getAllUsersController(req, res) {
   try {
     const { users } = await getAllUsers();
     res.status(200).json(users);
@@ -125,7 +125,7 @@ export async function getAllUsersController(res) {
 }
 
 
-export async function getRolesController(res) {
+export async function getRolesController(req, res) {
   try {
     const { roles } = await getRoles();
     res.status(200).json(roles);
